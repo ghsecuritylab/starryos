@@ -13,7 +13,7 @@ int main(int argc, char **argv)
 	int i;
 	task_init();
 
-	for (i = 0; i < 255 * 16; i ++) {
+	for (i = 0; i < 256 * 256; i ++) {
 		create_task("test", 4, i % 16, test_func, NULL);
 	}
 

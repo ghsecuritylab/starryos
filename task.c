@@ -3,7 +3,7 @@
 
 #define TASK_NAME_MAX	256
 #define TASKS_MAX		256
-#define PRIORITY_MAX	16
+#define PRIORITY_MAX	256
 struct task {
 	char name[TASK_NAME_MAX];
 	task_func func;

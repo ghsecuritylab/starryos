@@ -1,21 +1,27 @@
 #include <stdio.h>
 #include "task.h"
 
+#define TASK_NAME_MAX	256
+#define TASKS_MAX		256
+#define PRIORITY_MAX	16
 struct task {
-	char name[256];
+	char name[TASK_NAME_MAX];
 	task_func func;
 	void *arg;
 };
 
-int task_index = 0;
-struct task tasks[256];
+int task_indexs[PRIORITY_MAX] = {0};
+struct task tasks[PRIORITY_MAX][TASKS_MAX];
 
-int create_task(char *task_name, int task_name_len, task_func func, void *arg)
+int create_task(char *task_name, int task_name_len, int priority, task_func func, void *arg)
 {
-	snprintf(tasks[task_index].name, 256, "%s", task_name);
-	tasks[task_index].func = func;
-	tasks[task_index].arg = arg;
-	task_index ++;
+	struct task *t = &tasks[priority][task_indexs[priority]]; 
+
+	snprintf(t->name, TASK_NAME_MAX, "%s", task_name);
+	t->func = func;
+	t->arg = arg;
+
+	task_indexs[priority] ++;
 
 	return 0;
 }
@@ -28,9 +34,14 @@ int delete_task(int task_id)
 int run_task()
 {
 	int i = 0;
-	for (i = 0; i < task_index; i ++) {
-		tasks[i].func(tasks[i].arg);
+	int j = 0;
+
+	for (i = 0; i < PRIORITY_MAX; i ++) {
+		for (j = 0; j < task_indexs[i]; j ++) {
+			tasks[i][j].func(tasks[i][j].arg);
+		}
 	}
+
 	return 0;
 }
 

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "task.h"
 
 #define TASK_NAME_MAX	256
@@ -28,6 +29,29 @@ int create_task(char *task_name, int task_name_len, int priority, task_func func
 
 int delete_task(int task_id)
 {
+	return 0;
+}
+
+int run_one_task()
+{
+	int i = 0;
+	int j = 0;
+	int run_flag = 0;
+
+	for (i = 0; i < PRIORITY_MAX; i ++) {
+		if (task_indexs[i] == 0) {
+			continue;
+		}
+		tasks[i][0].func(tasks[i][0].arg);
+
+		memcpy(&tasks[i][0], &tasks[i][1], (task_indexs[i] - 1) * sizeof(struct task));
+		run_flag = 1;
+		task_indexs[i]--;
+	}
+
+	if (run_flag == 0) {
+		return -1;
+	}
 	return 0;
 }
 

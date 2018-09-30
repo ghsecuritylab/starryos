@@ -2,12 +2,15 @@
 #include <unistd.h>
 #include "task.h"
 #include "memory.h"
+#include "time.h"
 
 static void *test_func(void *arg)
 {
+	int now;
 	void *mem = luban_memory_malloc(1024);
 
-	printf("hello world, mem: %p\n", mem);	
+	now = luban_time();
+	printf("hello world, mem: %p, time: %d, time_str: %s\n", mem, now, luban_time_str());	
 	
 	luban_memory_free(mem);
 

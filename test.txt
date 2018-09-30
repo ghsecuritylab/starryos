@@ -57,17 +57,3 @@ int main(int argc, char **argv)
 	for (i = 0; i < /*256 * 256*/16; i ++) {
 		create_task("test", 4, i % 16, test_func, NULL);
 	}
-
-
-	while(1) {
-		ret = run_one_task();
-		if (ret != 0) {
-			sleep(1);
-		}
-	}
-
-	task_fini();
-	luban_memory_fini();
-
-	return 0;
-}

@@ -7,7 +7,7 @@ LDFLAGS+=
 
 all: luban
 
-LIB_OBJS = task.o main.o
+LIB_OBJS = task.o main.o memory.o
 
 luban: $(LIB_OBJS)
 	${CC} ${CFLAGS} $(LIB_OBJS) -o main ${LDFLAGS}

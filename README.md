@@ -6,3 +6,5 @@ starryos
 
 for : 
   汽车，无人机，飞机，火箭，卫星，飞船.
+
+BSD license, 另外，starryos 代码，随意修改，不需要承担任务法律责任
